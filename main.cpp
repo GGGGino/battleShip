@@ -6,28 +6,42 @@
 #include <stdlib.h>
 #include <string.h>
 #include <thread>
+#include "ShipGame.h"
+#include "Player.h"
 
 #define PORT 8080
 
-void readFromStream(int newSocket) {
+void readFromStream(int *sockfd, sockaddr_in address) {
     char buffer[1024] = {0};
-    ssize_t continua = 1;
-    char *hello = "Hello from server\n";
+    ssize_t continua;
+    char *hello = "Goodbye\n";
+    char *exitWord = "exit\n";
+    int new_socket, valread;
+    int addressLength = sizeof(address);
 
-    while((continua = read(newSocket , buffer, 1024)) > 0){
-        send(newSocket , hello , strlen(hello) , 0);
-        printf("buffer: %s", buffer);
+    if ((new_socket = accept(*sockfd, (struct sockaddr *)&address, (socklen_t*)&addressLength))<0) {
+        perror("accept");
+        exit(EXIT_FAILURE);
     }
+
+    do{
+        read(new_socket , buffer, 1024);
+        printf("buffer: %s", buffer);
+    }while( strcmp(buffer, exitWord) != 0);
+
+    printf("ciaooo");
+    send(new_socket , hello , strlen(hello) , 0);
+    close(new_socket);
 }
 
+/**
+ *
+ */
 void createSocket() {
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    int new_socket, valread;
-    int sockets[5];
     int opt = 1;
     struct sockaddr_in address;
-    int addressLength = sizeof(address);
-    std::thread ts[5];
+    std::thread threads[5];
 
     if( sockfd == 0 ) {
         std::cout << "Socket non funzionante";
@@ -54,15 +68,12 @@ void createSocket() {
         exit(EXIT_FAILURE);
     }
 
-    for(int i = 0; i<5; i++) {
-        if ((new_socket = accept(sockfd, (struct sockaddr *)&address, (socklen_t*)&addressLength))<0) {
-            perror("accept");
-            exit(EXIT_FAILURE);
-        }
+    for(int i = 0; i < 5; i++) {
+        threads[i] = std::thread(readFromStream, &sockfd, address);
+    }
 
-        std::thread reader(readFromStream, new_socket);
-
-        reader.join();
+    for(int i = 0; i < 5; i++) {
+        threads[i].join();
     }
 
     printf("Bye bye\n");
