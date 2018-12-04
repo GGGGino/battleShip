@@ -17,6 +17,7 @@ private:
 
 public:
     Player(char *t_name, int t_punteggio);
+    ~Player(){}
     Player *setPunteggio(int t_punteggio);
     char *getName();
     int getPunteggio();

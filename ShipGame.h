@@ -17,8 +17,9 @@ private:
 
 public:
     void addPlayer(Player player);
-    void removePlayer(Player player);
+    void removePlayer(Player *player);
     void removePlayerAtIndex(int index);
+    static Player *createRandomPlayer(char *name);
 };
 
 #endif //BATTLESHIP_SHIPGAME_H

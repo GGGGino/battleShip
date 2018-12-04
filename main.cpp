@@ -81,6 +81,31 @@ void createSocket() {
 
 void instantiateShipGame() {
     ShipGame shipGame;
+    Player *player1 = ShipGame::createRandomPlayer("Gino");
+    Player *player2 = ShipGame::createRandomPlayer("Paolo");
+    Player *player3 = ShipGame::createRandomPlayer("Giovanni");
+    Player *player4 = ShipGame::createRandomPlayer("Alloh");
+
+    std::cout << sizeof(player1) << std::endl;
+    std::cout << sizeof(player2) << std::endl;
+    std::cout << sizeof(player3) << std::endl;
+    std::cout << sizeof(player4) << std::endl;
+
+    shipGame.addPlayer(*player1);
+    shipGame.addPlayer(*player2);
+    shipGame.addPlayer(*player3);
+
+    delete player1;
+    delete player2;
+    delete player3;
+    delete player4;
+    player4 = NULL;
+
+    std::cout << "---------" << std::endl;
+    std::cout << sizeof(player1) << std::endl;
+    std::cout << sizeof(player2) << std::endl;
+    std::cout << sizeof(player3) << std::endl;
+    std::cout << sizeof(player4) << std::endl;
 }
 
 int main(int argc, char const *argv[]) {

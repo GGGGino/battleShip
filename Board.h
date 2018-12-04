@@ -14,9 +14,9 @@ private:
     unsigned short int grid[Board::SIZE][Board::SIZE] = {0};
 
 public:
-    void addShip(Ship ship, int x, int y);
+    void addShip(Ship *ship, int x, int y);
 private:
-    bool canAddShip(Ship ship, int x, int y);
+    bool canAddShip(Ship *ship, int x, int y);
 };
 
 
