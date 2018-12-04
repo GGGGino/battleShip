@@ -6,15 +6,16 @@
 #define BATTLESHIP_SHIPGAME_H
 
 #include "Player.h"
+#include "Board.h"
 #include <stdio.h>
 #include <vector>
 
 class ShipGame {
 private:
     std::vector<Player> players;
+    Board board;
 
 public:
-    ShipGame();
     void addPlayer(Player player);
     void removePlayer(Player player);
     void removePlayerAtIndex(int index);

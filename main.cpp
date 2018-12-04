@@ -79,8 +79,16 @@ void createSocket() {
     printf("Bye bye\n");
 }
 
+void instantiateShipGame() {
+    ShipGame shipGame;
+}
+
 int main(int argc, char const *argv[]) {
     std::cout << "Hello, World!" << std::endl;
+
+    instantiateShipGame();
+
     createSocket();
+
     return 0;
 }

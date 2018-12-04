@@ -3,4 +3,4 @@ project(battleShip)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(battleShip main.cpp ShipGame.cpp ShipGame.h Player.cpp Player.h Board.cpp Board.h)
+add_executable(battleShip main.cpp ShipGame.cpp ShipGame.h Player.cpp Player.h Board.cpp Board.h Ship.h)
