@@ -10,14 +10,26 @@ void Ship::changeOrientation() {
     xLength = tempX;
 }
 
-int Ship::getSize() {
-    return size;
+Ship1::Ship1() {
+    size = 1;
+    xLength = 1;
+    yLength = 1;
 }
 
-int Ship::getXLength() {
-    return xLength;
+Ship2::Ship2() {
+    size = 2;
+    xLength = 2;
+    yLength = 1;
 }
 
-int Ship::getYLength() {
-    return yLength;
+Ship3::Ship3() {
+    size = 3;
+    xLength = 3;
+    yLength = 1;
+}
+
+Ship4::Ship4() {
+    size = 2;
+    xLength = 4;
+    yLength = 1;
 }

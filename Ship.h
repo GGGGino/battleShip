@@ -14,9 +14,17 @@ protected:
 public:
     void positionate(int x, int y);
     void changeOrientation();
-    int getSize();
-    int getXLength();
-    int getYLength();
+    int getSize() {
+        return size;
+    }
+
+    int getXLength() {
+        return xLength;
+    }
+
+    int getYLength() {
+        return yLength;
+    }
 };
 
 class Ship1: public Ship {
