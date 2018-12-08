@@ -38,9 +38,8 @@ void ShipGame::createRandomPlayers(int nGiocatori) {
         int x = rand() % rangeXY + 0;
         int y = rand() % rangeXY + 0;
         int shipLength = rand() % rangShip + 0;
-        int random = rand();
 
         std::cout << "Provo a mettere una barca lunga: " << shipLength << " in x: " << x << " - y: " << y << std::endl;
-        player->putShipOnBoard(&board, shipLength, x, y);
+        player->putShipOnBoard(shipLength, x, y);
     }
 }

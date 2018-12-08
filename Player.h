@@ -15,6 +15,7 @@ private:
     int punteggio;
     int tempoRimasto;
     std::vector<Ship> ships;
+    Board board;
 
 public:
     Player(char *t_name, int t_punteggio);
@@ -24,7 +25,7 @@ public:
     int getPunteggio();
     int getTemporimasto();
     void createStartingShips();
-    bool putShipOnBoard(Board *board, int shipLength, int x, int y);
+    bool putShipOnBoard(int shipLength, int x, int y);
     Ship *getAvailableShipPerLength(int shipLength);
 };
 

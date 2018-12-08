@@ -13,7 +13,6 @@
 class ShipGame {
 private:
     std::vector<Player> players;
-    Board board;
 
 public:
     /**

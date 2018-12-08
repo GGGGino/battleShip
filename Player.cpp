@@ -67,12 +67,12 @@ Ship* Player::getAvailableShipPerLength(int shipLength) {
     return ship;
 }
 
-bool Player::putShipOnBoard(Board *board, int shipLength, int x, int y) {
+bool Player::putShipOnBoard(int shipLength, int x, int y) {
     Ship *ship = getAvailableShipPerLength(shipLength);
     bool shipInsertedInBoard = false;
 
     if( ship ){
-        shipInsertedInBoard = board->addShip(ship, x, y);
+        shipInsertedInBoard = board.addShip(ship, x, y);
     }
 
     if( !shipInsertedInBoard ){
