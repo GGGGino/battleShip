@@ -5,9 +5,10 @@
 #ifndef BATTLESHIP_PLAYER_H
 #define BATTLESHIP_PLAYER_H
 
+#include <vector>
 #include "Ship.h"
 #include "Board.h"
-#include <vector>
+#include "AttackResult.h"
 
 class Player {
 private:
@@ -27,6 +28,8 @@ public:
     void createStartingShips();
     bool putShipOnBoard(int shipLength, int x, int y);
     Ship *getAvailableShipPerLength(int shipLength);
+    // creare un enum per il ritorno da un attacco
+    ATTACK_RESULT attackPlayer(Player *playerAttacked);
 };
 
 struct VariabileGrossa {

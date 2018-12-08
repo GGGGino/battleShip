@@ -2,9 +2,10 @@
 // Created by david ginanni on 03/12/2018.
 //
 
+#include <iostream>
 #include "Player.h"
 #include "Ship.h"
-#include <iostream>
+#include "AttackResult.h"
 
 Player::Player(char *t_name, const int t_punteggio) {
     name = t_name;
@@ -78,4 +79,8 @@ bool Player::putShipOnBoard(int shipLength, int x, int y) {
     if( !shipInsertedInBoard ){
         std::cout << "Nave non inserita" << std::endl;
     }
+}
+
+ATTACK_RESULT Player::attackPlayer(Player *playerAttacked) {
+    return ATTACK_RESULT::HIT;
 }
