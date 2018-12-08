@@ -11,6 +11,11 @@
 
 #define PORT 8080
 
+/**
+ *
+ * @param sockfd
+ * @param address
+ */
 void readFromStream(int *sockfd, sockaddr_in address) {
     char buffer[1024] = {0};
     ssize_t continua;
@@ -79,41 +84,21 @@ void createSocket() {
     printf("Bye bye\n");
 }
 
-void instantiateShipGame() {
-    ShipGame shipGame;
-    Player *player1 = ShipGame::createRandomPlayer("Gino");
-    Player *player2 = ShipGame::createRandomPlayer("Paolo");
-    Player *player3 = ShipGame::createRandomPlayer("Giovanni");
-    Player *player4 = ShipGame::createRandomPlayer("Alloh");
+/**
+ *
+ */
+ShipGame *instantiateShipGame() {
+    ShipGame *shipGame = new ShipGame();
+    shipGame->createRandomPlayers(5);
 
-    std::cout << sizeof(player1) << std::endl;
-    std::cout << sizeof(player2) << std::endl;
-    std::cout << sizeof(player3) << std::endl;
-    std::cout << sizeof(player4) << std::endl;
-
-    shipGame.addPlayer(*player1);
-    shipGame.addPlayer(*player2);
-    shipGame.addPlayer(*player3);
-
-    delete player1;
-    delete player2;
-    delete player3;
-    delete player4;
-    player4 = NULL;
-
-    std::cout << "---------" << std::endl;
-    std::cout << sizeof(player1) << std::endl;
-    std::cout << sizeof(player2) << std::endl;
-    std::cout << sizeof(player3) << std::endl;
-    std::cout << sizeof(player4) << std::endl;
+    return shipGame;
 }
 
 int main(int argc, char const *argv[]) {
+    ShipGame *shipGame = instantiateShipGame();
     std::cout << "Hello, World!" << std::endl;
 
-    instantiateShipGame();
-
-    createSocket();
+    //createSocket();
 
     return 0;
 }

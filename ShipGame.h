@@ -16,10 +16,18 @@ private:
     Board board;
 
 public:
+    /**
+     *
+     * @param player
+     */
     void addPlayer(Player player);
+    //ShipGame();
+    //~ShipGame();
+    std::vector<Player> getPlayers();
     void removePlayer(Player *player);
     void removePlayerAtIndex(int index);
     static Player *createRandomPlayer(char *name);
+    void createRandomPlayers(int nGiocatori);
 };
 
 #endif //BATTLESHIP_SHIPGAME_H

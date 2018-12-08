@@ -6,6 +6,7 @@
 #define BATTLESHIP_PLAYER_H
 
 #include "Ship.h"
+#include "Board.h"
 #include <vector>
 
 class Player {
@@ -23,6 +24,8 @@ public:
     int getPunteggio();
     int getTemporimasto();
     void createStartingShips();
+    bool putShipOnBoard(Board *board, int shipLength, int x, int y);
+    Ship *getAvailableShipPerLength(int shipLength);
 };
 
 struct VariabileGrossa {

@@ -10,6 +10,7 @@ protected:
     int size;
     int xLength;
     int yLength;
+    bool alreadyPutted = false;
 
 public:
     void positionate(int x, int y);
@@ -24,6 +25,14 @@ public:
 
     int getYLength() {
         return yLength;
+    }
+
+    void put(){
+        alreadyPutted = true;
+    }
+
+    bool isAlreadyPutted(){
+        return alreadyPutted;
     }
 };
 

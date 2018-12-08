@@ -5,17 +5,19 @@
 #include "Board.h"
 #include "Ship.h"
 
-void Board::addShip(Ship *ship, int x, int y) {
+bool Board::addShip(Ship *ship, int x, int y) {
     if( !canAddShip(ship, x, y) ){
-        return;
+        return false;
     }
 
     // controllo che non ci siano altre navi in quella casella
     for(int i = 0; i<ship->getXLength(); i++) {
         for(int k = 0; k<ship->getYLength(); k++) {
-            grid[i][k] = 1;
+            grid[x+i][y+k] = ship;
         }
     }
+
+    return true;
 }
 
 bool Board::canAddShip(Ship *ship, int x, int y) {
@@ -32,7 +34,7 @@ bool Board::canAddShip(Ship *ship, int x, int y) {
     // controllo che non ci siano altre navi in quella casella
     for(int i = 0; i<ship->getXLength(); i++) {
         for(int k = 0; k<ship->getYLength(); k++) {
-            if( grid[i][k] > 0 ) {
+            if( grid[x+i][y+k] ) {
                 return false;
             }
         }

@@ -11,10 +11,10 @@ class Board {
 public:
     static const int SIZE = 10;
 private:
-    unsigned short int grid[Board::SIZE][Board::SIZE] = {0};
+    Ship *grid[Board::SIZE][Board::SIZE];
 
 public:
-    void addShip(Ship *ship, int x, int y);
+    bool addShip(Ship *ship, int x, int y);
 private:
     bool canAddShip(Ship *ship, int x, int y);
 };

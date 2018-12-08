@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "Ship.h"
+#include <iostream>
 
 Player::Player(char *t_name, const int t_punteggio) {
     name = t_name;
@@ -47,5 +48,34 @@ void Player::createStartingShips() {
     for(int i = 0; i < 1; i++) {
         Ship4 tempShip;
         ships.push_back(tempShip);
+    }
+}
+
+Ship* Player::getAvailableShipPerLength(int shipLength) {
+    Ship *ship = nullptr;
+
+    for(auto i = ships.begin(); i != ships.end(); i++) {
+        Ship *shipTemp;
+        shipTemp = &*i;
+        if( shipTemp->getSize() == shipLength && !shipTemp->isAlreadyPutted() ){
+            shipTemp->put();
+            ship = shipTemp;
+            break;
+        }
+    }
+
+    return ship;
+}
+
+bool Player::putShipOnBoard(Board *board, int shipLength, int x, int y) {
+    Ship *ship = getAvailableShipPerLength(shipLength);
+    bool shipInsertedInBoard = false;
+
+    if( ship ){
+        shipInsertedInBoard = board->addShip(ship, x, y);
+    }
+
+    if( !shipInsertedInBoard ){
+        std::cout << "Nave non inserita" << std::endl;
     }
 }
