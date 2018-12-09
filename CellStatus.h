@@ -8,7 +8,10 @@
 #include "Ship.h"
 
 enum CELL_STATUS {
-    EMPTY = 0
+    EMPTYW = 0,
+    HITTED = 1,
+    SINKED = 2,
+    SPLASHED = 3
 };
 
 #endif //BATTLESHIP_CELLSTATUS_H

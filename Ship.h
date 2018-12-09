@@ -5,16 +5,33 @@
 #ifndef BATTLESHIP_SHIP_H
 #define BATTLESHIP_SHIP_H
 
+#include "AttackResult.h"
+
 class Ship {
 protected:
     int size;
     int xLength;
     int yLength;
     bool alreadyPutted = false;
+    bool sinked = false;
+    int timeHitted = 0;
 
 public:
+    bool isSinked() {
+        return sinked;
+    }
     void positionate(int x, int y);
     void changeOrientation();
+    ATTACK_RESULT tryHit(int x, int y) {
+        timeHitted++;
+
+        if( timeHitted == size ){
+            sinked = true;
+            return ATTACK_RESULT::SINK;
+        }
+
+        return ATTACK_RESULT::HIT;
+    }
     int getSize() {
         return size;
     }

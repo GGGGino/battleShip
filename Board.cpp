@@ -5,6 +5,7 @@
 #include "Board.h"
 #include "Ship.h"
 #include "Cell.h"
+#include "CellStatus.h"
 
 Board::Board() {
     initializeBoard();
@@ -78,6 +79,22 @@ bool Board::canAddShip(Ship *ship, int x, int y) {
     return true;
 }
 
-ATTACK_RESULT Board::hitBoard(int x, int y) {
+ATTACK_RESULT Board::tryHit(int x, int y) {
+    Cell *cellTemp = grid[x][y];
+
+    if( cellTemp->status != ATTACK_RESULT::EMPTY ) {
+        return ATTACK_RESULT::ALREADY_HITTED;
+    }
+
+    if( !cellTemp->ship ) {
+        cellTemp->status = ATTACK_RESULT::SPLASH;
+        return ATTACK_RESULT::SPLASH;
+    }
+
+    if( cellTemp->ship ) {
+        cellTemp->status = cellTemp->ship->tryHit(x, y);
+        return cellTemp->status;
+    }
+
     return ATTACK_RESULT::SPLASH;
 }

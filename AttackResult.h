@@ -6,9 +6,12 @@
 #define BATTLESHIP_ATTACKRESULT_H
 
 enum ATTACK_RESULT {
-    SPLASH = 0,
-    HIT = 1,
-    SINK = 2
+    ALREADY_HITTED = -1,
+    EMPTY = 0,
+    SPLASH = 1,
+    HIT = 2,
+    SINK = 3,
+    WIN = 4
 };
 
 #endif //BATTLESHIP_ATTACKRESULT_H

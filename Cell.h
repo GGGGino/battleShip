@@ -6,12 +6,12 @@
 #define BATTLESHIP_CELL_H
 
 #include "Ship.h"
-#include "CellStatus.h"
+#include "AttackResult.h"
 
 struct Cell {
     Ship *ship;
     bool isHitted = false;
-    CELL_STATUS status = CELL_STATUS::EMPTY;
+    ATTACK_RESULT status = ATTACK_RESULT ::EMPTY;
 };
 
 #endif //BATTLESHIP_CELL_H

@@ -28,8 +28,33 @@ public:
     void createStartingShips();
     bool putShipOnBoard(int shipLength, int x, int y);
     Ship *getAvailableShipPerLength(int shipLength);
-    // creare un enum per il ritorno da un attacco
-    ATTACK_RESULT attackPlayer(Player *playerAttacked);
+
+    /**
+     * Method that do the attack
+     *
+     * @param playerAttacked
+     * @param x
+     * @param y
+     * @return
+     */
+    ATTACK_RESULT attackPlayer(Player *playerAttacked, int x, int y);
+
+    /**
+     * Method that suffer the attack
+     *
+     * @param attackinPlayer
+     * @param x
+     * @param y
+     * @return
+     */
+    ATTACK_RESULT takeHit(Player *attackinPlayer, int x, int y);
+
+    /**
+     * Check if the player has at least one ship alive
+     *
+     * @return
+     */
+    bool checkIfHasShipAlive();
 };
 
 struct VariabileGrossa {

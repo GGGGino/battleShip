@@ -81,6 +81,34 @@ bool Player::putShipOnBoard(int shipLength, int x, int y) {
     }
 }
 
-ATTACK_RESULT Player::attackPlayer(Player *playerAttacked) {
-    return ATTACK_RESULT::HIT;
+bool Player::checkIfHasShipAlive() {
+    for(auto i = ships.begin(); i != ships.end(); i++) {
+        Ship *shipTemp;
+        shipTemp = &*i;
+
+        if( !shipTemp->isSinked() )
+            return true;
+    }
+
+    return false;
+}
+
+ATTACK_RESULT Player::attackPlayer(Player *playerAttacked, int x, int y) {
+    ATTACK_RESULT result = playerAttacked->takeHit(this, x, y);
+    bool playerHasWin = false;
+
+    if( result == ATTACK_RESULT::SINK ){
+        playerHasWin = playerAttacked->checkIfHasShipAlive();
+    }
+
+    if( playerHasWin )
+        result = ATTACK_RESULT::WIN;
+
+    return result;
+}
+
+ATTACK_RESULT Player::takeHit(Player *attackinPlayer, int x, int y) {
+    ATTACK_RESULT result = board.tryHit(x, y);
+
+    return result;
 }
