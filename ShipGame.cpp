@@ -43,3 +43,19 @@ void ShipGame::createRandomPlayers(int nGiocatori) {
         player->putShipOnBoard(shipLength, x, y);
     }
 }
+
+void ShipGame::attackNextPlayer() {
+    srand(time(NULL));
+    for(int i = 1; i < players.size(); i++) {
+        for(int k = 1; k < 10; k++) {
+            Player *attackingPlayer = &players[i];
+            int rangeXY = 10 - 0 + 1;
+            int rangShip = 4 - 0 + 1;
+            int x = rand() % rangeXY + 0;
+            int y = rand() % rangeXY + 0;
+
+            ATTACK_RESULT resultAttack = attackingPlayer->attackPlayer(&(players[i-1]), x, y);
+            std::cout << "Attacco in x: " << x << " - y: " << y << " con risultato: " << resultAttack << std::endl;
+        }
+    }
+}

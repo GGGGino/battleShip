@@ -27,6 +27,7 @@ public:
     void removePlayerAtIndex(int index);
     static Player *createRandomPlayer(char *name);
     void createRandomPlayers(int nGiocatori);
+    void attackNextPlayer();
 };
 
 #endif //BATTLESHIP_SHIPGAME_H

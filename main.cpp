@@ -91,6 +91,8 @@ ShipGame *instantiateShipGame() {
     ShipGame *shipGame = new ShipGame();
     shipGame->createRandomPlayers(5);
 
+    shipGame->attackNextPlayer();
+
     return shipGame;
 }
 
