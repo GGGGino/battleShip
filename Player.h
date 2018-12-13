@@ -25,6 +25,7 @@ public:
     char *getName();
     int getPunteggio();
     int getTemporimasto();
+    Board *getBoard();
     void createStartingShips();
     bool putShipOnBoard(int shipLength, int x, int y);
     Ship *getAvailableShipPerLength(int shipLength);

@@ -99,3 +99,7 @@ ATTACK_RESULT Board::tryHit(int x, int y) {
 
     return ATTACK_RESULT::SPLASH;
 }
+
+Cell *Board::getCell(int x, int y) const{
+    return grid[x][y];
+}

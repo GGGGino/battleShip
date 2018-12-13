@@ -7,12 +7,14 @@
 
 #include "Player.h"
 #include "Board.h"
+#include "GridPrinter.h"
 #include <stdio.h>
 #include <vector>
 
 class ShipGame {
 private:
     std::vector<Player> players;
+    GridPrinter gridPrinter;
 
 public:
     /**
@@ -28,6 +30,7 @@ public:
     static Player *createRandomPlayer(char *name);
     void createRandomPlayers(int nGiocatori);
     void attackNextPlayer();
+    void printPlayerGrid(Player *player);
 };
 
 #endif //BATTLESHIP_SHIPGAME_H

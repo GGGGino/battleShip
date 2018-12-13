@@ -97,35 +97,19 @@ ShipGame *instantiateShipGame() {
     return shipGame;
 }
 
-void prindGrid() {
-    std::string cancellaRiga = "\r";
+void prindGridForEveryPlayer(ShipGame *shipGame) {
+    std::vector<Player> players = shipGame->getPlayers();
 
-    std::cout << "  | ";
-    for(int i=0; i<Board::SIZE; i++) {
-        std::cout << "" << i << " | " ;
+    for (int i = 0; i < players.size(); ++i) {
+        shipGame->printPlayerGrid(&players[i]);
     }
-    std::cout << std::endl;
-
-    for(int i=0; i<Board::SIZE; i++) {
-        std::cout << i << " | " ;
-        for(int k=0; k<Board::SIZE; k++) {
-            std::cout << "o" << " | ";
-        }
-        std::cout << std::endl;
-        std::cout << "  ";
-        for(int k=0; k<Board::SIZE; k++) {
-            std::cout << "----";
-        }
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
 }
 
 int main(int argc, char const *argv[]) {
     std::cout << "Hello, World!" << std::endl;
     ShipGame *shipGame = instantiateShipGame();
 
-    prindGrid();
+    prindGridForEveryPlayer(shipGame);
 
     //createSocket();
 

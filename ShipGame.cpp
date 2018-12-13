@@ -39,7 +39,7 @@ void ShipGame::createRandomPlayers(int nGiocatori) {
         int y = rand() % rangeXY + 0;
         int shipLength = rand() % rangShip + 0;
 
-        std::cout << i << " prova a mettere una barca lunga: " << shipLength << " in x: " << x << " - y: " << y << std::endl;
+        // std::cout << i << " prova a mettere una barca lunga: " << shipLength << " in x: " << x << " - y: " << y << std::endl;
         player->putShipOnBoard(shipLength, x, y);
     }
 }
@@ -56,7 +56,11 @@ void ShipGame::attackNextPlayer() {
             int y = rand() % rangeXY + 0;
 
             ATTACK_RESULT resultAttack = attackingPlayer->attackPlayer(playerAttacked, x, y);
-            std::cout << "Attacco in x: " << x << " - y: " << y << " con risultato: " << resultAttack << std::endl;
+            // std::cout << "Attacco in x: " << x << " - y: " << y << " con risultato: " << resultAttack << std::endl;
         }
     }
+}
+
+void ShipGame::printPlayerGrid(Player *player) {
+    gridPrinter.printPlayerGrid(player);
 }

@@ -111,3 +111,7 @@ ATTACK_RESULT Player::takeHit(Player *attackinPlayer, int x, int y) {
 
     return result;
 }
+
+Board *Player::getBoard() {
+    return &board;
+}

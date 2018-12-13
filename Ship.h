@@ -32,7 +32,7 @@ public:
 
         return ATTACK_RESULT::HIT;
     }
-    
+
     inline int getSize() {
         return size;
     }
