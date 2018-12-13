@@ -18,6 +18,7 @@ void Board::initializeBoard() {
     for(int i = 0; i<SIZE; i++) {
         for(int k = 0; k<SIZE; k++) {
             Cell *cella = new Cell;
+            cella->ship = nullptr;
             grid[i][k] = cella;
         }
     }

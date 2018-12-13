@@ -7,6 +7,7 @@
 #include <string.h>
 #include <thread>
 #include "ShipGame.h"
+#include "Board.h"
 #include "Player.h"
 
 #define PORT 8080
@@ -96,9 +97,35 @@ ShipGame *instantiateShipGame() {
     return shipGame;
 }
 
+void prindGrid() {
+    std::string cancellaRiga = "\r";
+
+    std::cout << "  | ";
+    for(int i=0; i<Board::SIZE; i++) {
+        std::cout << "" << i << " | " ;
+    }
+    std::cout << std::endl;
+
+    for(int i=0; i<Board::SIZE; i++) {
+        std::cout << i << " | " ;
+        for(int k=0; k<Board::SIZE; k++) {
+            std::cout << "o" << " | ";
+        }
+        std::cout << std::endl;
+        std::cout << "  ";
+        for(int k=0; k<Board::SIZE; k++) {
+            std::cout << "----";
+        }
+        std::cout << std::endl;
+    }
+    std::cout << std::endl;
+}
+
 int main(int argc, char const *argv[]) {
-    ShipGame *shipGame = instantiateShipGame();
     std::cout << "Hello, World!" << std::endl;
+    ShipGame *shipGame = instantiateShipGame();
+
+    prindGrid();
 
     //createSocket();
 

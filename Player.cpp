@@ -53,7 +53,7 @@ void Player::createStartingShips() {
 }
 
 Ship* Player::getAvailableShipPerLength(int shipLength) {
-    Ship *ship = nullptr;
+    Ship *ship;
 
     for(auto i = ships.begin(); i != ships.end(); i++) {
         Ship *shipTemp;
@@ -97,9 +97,8 @@ ATTACK_RESULT Player::attackPlayer(Player *playerAttacked, int x, int y) {
     ATTACK_RESULT result = playerAttacked->takeHit(this, x, y);
     bool playerHasWin = false;
 
-    if( result == ATTACK_RESULT::SINK ){
+    if( result == ATTACK_RESULT::SINK )
         playerHasWin = playerAttacked->checkIfHasShipAlive();
-    }
 
     if( playerHasWin )
         result = ATTACK_RESULT::WIN;

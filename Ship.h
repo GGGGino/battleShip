@@ -14,7 +14,7 @@ protected:
     int yLength;
     bool alreadyPutted = false;
     bool sinked = false;
-    int timeHitted = 0;
+    int timeHitted;
 
 public:
     bool isSinked() {
@@ -32,23 +32,24 @@ public:
 
         return ATTACK_RESULT::HIT;
     }
-    int getSize() {
+    
+    inline int getSize() {
         return size;
     }
 
-    int getXLength() {
+    inline int getXLength() {
         return xLength;
     }
 
-    int getYLength() {
+    inline int getYLength() {
         return yLength;
     }
 
-    void put(){
+    inline void put(){
         alreadyPutted = true;
     }
 
-    bool isAlreadyPutted(){
+    inline bool isAlreadyPutted(){
         return alreadyPutted;
     }
 };
@@ -59,6 +60,7 @@ public:
         size = 1;
         xLength = 1;
         yLength = 1;
+        timeHitted = 0;
     }
 };
 
@@ -68,6 +70,7 @@ public:
         size = 2;
         xLength = 2;
         yLength = 1;
+        timeHitted = 0;
     }
 };
 
@@ -77,6 +80,7 @@ public:
         size = 3;
         xLength = 3;
         yLength = 1;
+        timeHitted = 0;
     }
 };
 
@@ -86,6 +90,7 @@ public:
         size = 4;
         xLength = 4;
         yLength = 1;
+        timeHitted = 0;
     }
 };
 
