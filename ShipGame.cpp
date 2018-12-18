@@ -29,18 +29,28 @@ Player *ShipGame::createRandomPlayer(char *name) {
 }
 
 void ShipGame::createRandomPlayers(int nGiocatori) {
-    srand(time(NULL));
-    for(int i = 0; i < nGiocatori; i++) {
-        Player *player = createRandomPlayer("Gino");
-        addPlayer(*player);
-        int rangeXY = 10 - 0 + 1;
-        int rangShip = 4 - 0 + 1;
-        int x = rand() % rangeXY + 0;
-        int y = rand() % rangeXY + 0;
-        int shipLength = rand() % rangShip + 0;
+    Player *player = nullptr;
 
-        // std::cout << i << " prova a mettere una barca lunga: " << shipLength << " in x: " << x << " - y: " << y << std::endl;
-        player->putShipOnBoard(shipLength, x, y);
+    for(int i = 0; i < nGiocatori; i++) {
+        player = createRandomPlayer("Gino");
+        addPlayer(*player);
+        srand(time(0));
+
+        for(int k = 0; k < player->getShips().size() - 4; k++) {
+            bool naveInserita = false;
+            do{
+                naveInserita = false;
+
+                int rangeXY = 10 - 0 + 1;
+                int rangShip = 4 - 0 + 1;
+                int x = rand() % rangeXY + 0;
+                int y = rand() % rangeXY + 0;
+                int shipLength = rand() % rangShip + 0;
+
+                // std::cout << i << " prova a mettere una barca lunga: " << shipLength << " in x: " << x << " - y: " << y << std::endl;
+                naveInserita = player->putShipOnBoard(shipLength, x, y);
+            }while(!naveInserita);
+        }
     }
 }
 

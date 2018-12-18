@@ -53,19 +53,16 @@ void Player::createStartingShips() {
 }
 
 Ship* Player::getAvailableShipPerLength(int shipLength) {
-    Ship *ship;
-
     for(auto i = ships.begin(); i != ships.end(); i++) {
         Ship *shipTemp;
         shipTemp = &*i;
         if( shipTemp->getSize() == shipLength && !shipTemp->isAlreadyPutted() ){
             shipTemp->put();
-            ship = shipTemp;
-            break;
+            return shipTemp;
         }
     }
 
-    return ship;
+    return nullptr;
 }
 
 bool Player::putShipOnBoard(int shipLength, int x, int y) {
@@ -77,8 +74,14 @@ bool Player::putShipOnBoard(int shipLength, int x, int y) {
     }
 
     if( !shipInsertedInBoard ){
-        std::cout << "Nave non inserita" << std::endl;
+        std::cout << "Nave non inserita";
+    }else{
+        std::cout << "Nave inserita";
     }
+    std::cout << " - " << shipLength << " in x: " << x << " - y: " << y << std::endl;
+
+
+    return shipInsertedInBoard;
 }
 
 bool Player::checkIfHasShipAlive() {

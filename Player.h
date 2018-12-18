@@ -15,6 +15,7 @@ private:
     char *name;
     int punteggio;
     int tempoRimasto;
+    int nNaviRimaste;
     std::vector<Ship> ships;
     Board board;
 
@@ -25,6 +26,9 @@ public:
     char *getName();
     int getPunteggio();
     int getTemporimasto();
+    inline std::vector<Ship> getShips() {
+        return ships;
+    }
     Board *getBoard();
     void createStartingShips();
     bool putShipOnBoard(int shipLength, int x, int y);
