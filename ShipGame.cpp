@@ -30,11 +30,11 @@ Player *ShipGame::createRandomPlayer(char *name) {
 
 void ShipGame::createRandomPlayers(int nGiocatori) {
     Player *player = nullptr;
+    srand(time(0));
 
     for(int i = 0; i < nGiocatori; i++) {
         player = createRandomPlayer("Gino");
         addPlayer(*player);
-        srand(time(0));
 
         for(int k = 0; k < player->getShips().size() - 4; k++) {
             bool naveInserita = false;
