@@ -6,13 +6,14 @@
 #define BATTLESHIP_PLAYER_H
 
 #include <vector>
+#include <string>
 #include "Ship.h"
 #include "Board.h"
 #include "AttackResult.h"
 
 class Player {
 private:
-    char *name;
+    std::string name;
     int punteggio;
     int tempoRimasto;
     int nNaviRimaste;
@@ -20,10 +21,10 @@ private:
     Board board;
 
 public:
-    Player(char *t_name, int t_punteggio);
+    Player(std::string t_name, int t_punteggio);
     ~Player(){}
     Player *setPunteggio(int t_punteggio);
-    char *getName();
+    std::string getName();
     int getPunteggio();
     int getTemporimasto();
     inline std::vector<Ship> getShips() {

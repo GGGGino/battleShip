@@ -23,7 +23,7 @@ std::vector<Player> ShipGame::getPlayers() {
     return players;
 }
 
-Player *ShipGame::createRandomPlayer(char *name) {
+Player *ShipGame::createRandomPlayer(std::string name) {
     Player *player = new Player(name, 1000);
     return player;
 }

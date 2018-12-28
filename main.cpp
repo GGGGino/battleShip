@@ -25,18 +25,19 @@ void readFromStream(int *sockfd, sockaddr_in address) {
     int new_socket, valread;
     int addressLength = sizeof(address);
 
-    if ((new_socket = accept(*sockfd, (struct sockaddr *)&address, (socklen_t*)&addressLength))<0) {
-        perror("accept");
-        exit(EXIT_FAILURE);
-    }
-
     do{
+        if ((new_socket = accept(*sockfd, (struct sockaddr *)&address, (socklen_t*)&addressLength))<0) {
+            perror("accept");
+            exit(EXIT_FAILURE);
+        }
+        std::cout << "aperto socket";
+
         read(new_socket , buffer, 1024);
         printf("buffer: %s", buffer);
     }while( strcmp(buffer, exitWord) != 0);
 
     printf("ciaooo");
-    send(new_socket , hello , strlen(hello) , 0);
+    send(new_socket , hello, strlen(hello), 0);
     close(new_socket);
 }
 
@@ -69,18 +70,20 @@ void createSocket() {
         exit(EXIT_FAILURE);
     }
 
-    if (listen(sockfd, 3) < 0) {
+    if (listen(sockfd, SOMAXCONN) < 0) {
         perror("listen");
         exit(EXIT_FAILURE);
     }
 
-    for(int i = 0; i < 5; i++) {
+    readFromStream(&sockfd, address);
+
+    /*for(int i = 0; i < 5; i++) {
         threads[i] = std::thread(readFromStream, &sockfd, address);
     }
 
     for(int i = 0; i < 5; i++) {
         threads[i].join();
-    }
+    }*/
 
     printf("Bye bye\n");
 }
@@ -90,7 +93,24 @@ void createSocket() {
  */
 ShipGame *instantiateShipGame() {
     ShipGame *shipGame = new ShipGame();
-    shipGame->createRandomPlayers(5);
+    std::string input;
+    int nGiocatori = 0;
+    int nShipPutted = 0;
+    std::string playerName;
+
+    do{
+        std::cout << "Inserisci il numero dei giocatori: ";
+        std::cin >> nGiocatori;
+        std::cout << "-----------------" << std::endl;
+
+        for (int i = 0; i < nGiocatori; ++i) {
+            std::cout << "Inserisci il nome del giocatore: ";
+            std::cin >> playerName;
+            Player *player = ShipGame::createRandomPlayer(playerName);
+
+            shipGame->addPlayer(*player);
+        }
+    }while(input.compare("") != 0);
 
     shipGame->attackNextPlayer();
 

@@ -7,9 +7,8 @@
 #include "Ship.h"
 #include "AttackResult.h"
 
-Player::Player(char *t_name, const int t_punteggio) {
-    name = t_name;
-    punteggio = t_punteggio;
+Player::Player(std::string t_name, const int t_punteggio):
+    name(t_name), punteggio(t_punteggio) {
     createStartingShips();
 }
 
@@ -18,7 +17,7 @@ Player *Player::setPunteggio(const int t_punteggio) {
     return this;
 }
 
-char *Player::getName() {
+std::string Player::getName() {
     return name;
 }
 

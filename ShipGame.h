@@ -10,6 +10,7 @@
 #include "GridPrinter.h"
 #include <stdio.h>
 #include <vector>
+#include <string>
 
 class ShipGame {
 private:
@@ -27,7 +28,7 @@ public:
     std::vector<Player> getPlayers();
     void removePlayer(Player *player);
     void removePlayerAtIndex(int index);
-    static Player *createRandomPlayer(char *name);
+    static Player *createRandomPlayer(std::string name);
     void createRandomPlayers(int nGiocatori);
     void attackNextPlayer();
     void printPlayerGrid(Player *player);
