@@ -9,6 +9,7 @@
 #include "ShipGame.h"
 #include "Board.h"
 #include "Player.h"
+#include "Utility.h"
 
 #define PORT 8080
 
@@ -95,22 +96,40 @@ ShipGame *instantiateShipGame() {
     ShipGame *shipGame = new ShipGame();
     std::string input;
     int nGiocatori = 0;
-    int nShipPutted = 0;
     std::string playerName;
 
-    do{
-        std::cout << "Inserisci il numero dei giocatori: ";
-        std::cin >> nGiocatori;
-        std::cout << "-----------------" << std::endl;
+    std::cout << "Inserisci il numero dei giocatori: ";
+    std::cin >> nGiocatori;
+    std::cout << "-----------------" << std::endl;
 
-        for (int i = 0; i < nGiocatori; ++i) {
-            std::cout << "Inserisci il nome del giocatore: ";
-            std::cin >> playerName;
-            Player *player = ShipGame::createRandomPlayer(playerName);
+    for (int i = 0; i < nGiocatori; ++i) {
+        std::cout << "Inserisci il nome del giocatore: ";
+        std::cin >> playerName;
+        Player *player = ShipGame::createRandomPlayer(playerName);
+        int nShipPutted = 0;
 
-            shipGame->addPlayer(*player);
-        }
-    }while(input.compare("") != 0);
+        do{
+            myutility::elencoStringhe sizePosizioneShip;
+            std::string sizeBarcaEPosizione;
+            std::cout << "Inserisci la grandezza della barca e la posizione separate da \"-\"(SizeBarca-X-Y): ";
+            std::cin >> sizeBarcaEPosizione;
+
+            sizePosizioneShip = myutility::explode(sizeBarcaEPosizione, '-');
+            int sizeShip = std::stoi(sizePosizioneShip.at(0));
+            int shipX = std::stoi(sizePosizioneShip.at(1));
+            int shipY = std::stoi(sizePosizioneShip.at(2));
+
+            if( !player->putShipOnBoard(sizeShip, shipX, shipY) ) {
+                std::cout << "Nave nn inserita" << std::endl;
+                continue;
+            }
+
+            std::cout << "Nave lunga: " << sizeShip << " in x: " << shipX << " - y: " << shipY << std::endl;
+            nShipPutted++;
+        }while(nShipPutted < player->getShips().size());
+
+        shipGame->addPlayer(*player);
+    }
 
     shipGame->attackNextPlayer();
 
