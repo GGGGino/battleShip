@@ -120,13 +120,22 @@ ShipGame *instantiateShipGame() {
             int shipY = std::stoi(sizePosizioneShip.at(2));
 
             if( !player->putShipOnBoard(sizeShip, shipX, shipY) ) {
+                std::vector<Ship*> naviAvailables = player->getAvailableShip();
                 std::cout << "Nave nn inserita" << std::endl;
+                std::cout << "Navi disponibili: ";
+
+                for(Ship *ship : naviAvailables) {
+                    std::cout << ship->getSize() << ", ";
+                }
+
+                std::cout << std::endl;
+
                 continue;
             }
 
             std::cout << "Nave lunga: " << sizeShip << " in x: " << shipX << " - y: " << shipY << std::endl;
             nShipPutted++;
-        }while(nShipPutted < player->getShips().size());
+        }while(nShipPutted < (player->getShips().size() - 7));
 
         shipGame->addPlayer(*player);
     }

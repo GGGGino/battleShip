@@ -33,23 +33,23 @@ public:
         return ATTACK_RESULT::HIT;
     }
 
-    inline int getSize() {
+    inline int getSize() const{
         return size;
     }
 
-    inline int getXLength() {
+    inline int getXLength() const{
         return xLength;
     }
 
-    inline int getYLength() {
+    inline int getYLength() const{
         return yLength;
     }
 
-    inline void put(){
+    inline void put() {
         alreadyPutted = true;
     }
 
-    inline bool isAlreadyPutted(){
+    inline bool isAlreadyPutted() const {
         return alreadyPutted;
     }
 };

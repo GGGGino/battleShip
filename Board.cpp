@@ -45,6 +45,8 @@ bool Board::addShip(Ship *ship, int x, int y) {
         }
     }
 
+    ship->put();
+
     return true;
 }
 

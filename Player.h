@@ -30,6 +30,20 @@ public:
     inline std::vector<Ship> getShips() {
         return ships;
     }
+    inline std::vector<Ship*> getAvailableShip() {
+        std::vector<Ship*> availableShips;
+
+        // another way to filter but i don't want a copy
+        // std::copy_if(ships.begin(), ships.end(), availableShips, [](Ship ship){ return !ship.isAlreadyPutted(); } );
+
+        for(Ship &ship : ships) {
+            if( !ship.isAlreadyPutted() ) {
+                availableShips.push_back(&ship);
+            }
+        }
+
+        return availableShips;
+    }
     Board *getBoard();
     void createStartingShips();
     bool putShipOnBoard(int shipLength, int x, int y);

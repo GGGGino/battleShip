@@ -56,7 +56,6 @@ Ship* Player::getAvailableShipPerLength(int shipLength) {
         Ship *shipTemp;
         shipTemp = &*i;
         if( shipTemp->getSize() == shipLength && !shipTemp->isAlreadyPutted() ){
-            shipTemp->put();
             return shipTemp;
         }
     }
