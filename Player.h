@@ -46,7 +46,23 @@ public:
     }
     Board *getBoard();
     void createStartingShips();
+
+    /**
+     * Here I put the ship of the size "shipLength" in the x,y staring point
+     *
+     * @param shipLength
+     * @param x
+     * @param y
+     * @return
+     */
     bool putShipOnBoard(int shipLength, int x, int y);
+
+    /**
+     * Here i get the list of the remaining ship, ready for being positioned in the grid
+     *
+     * @param shipLength
+     * @return
+     */
     Ship *getAvailableShipPerLength(int shipLength);
 
     /**

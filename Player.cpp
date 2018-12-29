@@ -63,6 +63,7 @@ Ship* Player::getAvailableShipPerLength(int shipLength) {
     return nullptr;
 }
 
+
 bool Player::putShipOnBoard(int shipLength, int x, int y) {
     Ship *ship = getAvailableShipPerLength(shipLength);
     bool shipInsertedInBoard = false;
@@ -70,14 +71,6 @@ bool Player::putShipOnBoard(int shipLength, int x, int y) {
     if( ship ){
         shipInsertedInBoard = board.addShip(ship, x, y);
     }
-
-    if( !shipInsertedInBoard ){
-        std::cout << "Nave non inserita";
-    }else{
-        std::cout << "Nave inserita";
-    }
-    std::cout << " - " << shipLength << " in x: " << x << " - y: " << y << std::endl;
-
 
     return shipInsertedInBoard;
 }
