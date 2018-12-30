@@ -6,6 +6,7 @@
 #include "Ship.h"
 #include "Cell.h"
 #include "CellStatus.h"
+#include "Exception/CellNotEmptyException.h"
 
 Board::Board() {
     initializeBoard();
@@ -33,7 +34,7 @@ void Board::initializeBoard() {
  * @return
  */
 bool Board::addShip(Ship *ship, int x, int y) {
-    if( !canAddShip(ship, x, y) ){
+    if( !canAddShip(ship, x, y) ) {
         return false;
     }
 
@@ -74,7 +75,7 @@ bool Board::canAddShip(Ship *ship, int x, int y) {
         for(int k = 0; k<ship->getYLength(); k++) {
             Cell *cellaTemp = grid[x+i][y+k];
             if( cellaTemp && cellaTemp->ship ) {
-                return false;
+                throw CellNotEmptyException(cellaTemp->ship);
             }
         }
     }

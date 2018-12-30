@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Ship.h"
 #include "AttackResult.h"
+#include "Exception/CellNotEmptyException.h"
 
 Player::Player(std::string t_name, const int t_punteggio):
     name(t_name), punteggio(t_punteggio) {
@@ -69,7 +70,11 @@ bool Player::putShipOnBoard(int shipLength, int x, int y) {
     bool shipInsertedInBoard = false;
 
     if( ship ){
-        shipInsertedInBoard = board.addShip(ship, x, y);
+        try{
+            shipInsertedInBoard = board.addShip(ship, x, y);
+        }catch(CellNotEmptyException &e) {
+            std::cout << "Non posso mettere la nave perchè c'è gia: " << e.getShip()->getSize() << std::endl;
+        }
     }
 
     return shipInsertedInBoard;
