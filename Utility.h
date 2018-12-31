@@ -22,6 +22,17 @@ namespace myutility {
 
         return result;
     }
+
+    template<typename Lambda>
+    bool checkExplodesParams(elencoStringhe &strings, Lambda &&callback) {
+        for( const std::string &singleString: strings) {
+            if( !callback(singleString) ){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
 
 #endif //BATTLESHIP_UTILITY_H

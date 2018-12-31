@@ -17,12 +17,12 @@ private:
 
 public:
     Board();
-    bool addShip(Ship *ship, int x, int y);
+    bool addShip(Ship *ship, int x, int y, bool horizontal = true);
     ATTACK_RESULT tryHit(int x, int y);
     void initializeBoard();
     Cell *getCell(int x, int y) const;
 private:
-    bool canAddShip(Ship *ship, int x, int y);
+    bool canAddShip(Ship *ship, int x, int y, bool horizontal = true);
 };
 
 

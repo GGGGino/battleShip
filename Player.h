@@ -53,9 +53,10 @@ public:
      * @param shipLength
      * @param x
      * @param y
+     * @param horizontal
      * @return
      */
-    bool putShipOnBoard(int shipLength, int x, int y);
+    bool putShipOnBoard(int shipLength, int x, int y, bool horizontal = true);
 
     /**
      * Here i get the list of the remaining ship, ready for being positioned in the grid

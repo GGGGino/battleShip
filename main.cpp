@@ -102,6 +102,7 @@ ShipGame *instantiateShipGame() {
     std::cin >> nGiocatori;
     std::cout << "-----------------" << std::endl;
 
+    // game instantiation loop
     for (int i = 0; i < nGiocatori; ++i) {
         std::cout << "Inserisci il nome del giocatore: ";
         std::cin >> playerName;
@@ -111,42 +112,48 @@ ShipGame *instantiateShipGame() {
         do{
             myutility::elencoStringhe sizePosizioneShip;
             std::string sizeBarcaEPosizione;
-            std::cout << "Inserisci la grandezza della barca e la posizione separate da \"-\"(SizeBarca-X-Y): ";
+            std::cout << "Inserisci la grandezza della barca e la posizione separate da \"-\"(SizeBarca-X-Y-horizontal): ";
             std::cin >> sizeBarcaEPosizione;
 
             sizePosizioneShip = myutility::explode(sizeBarcaEPosizione, '-');
-            int sizeShip = std::stoi(sizePosizioneShip.at(0));
-            int shipX = std::stoi(sizePosizioneShip.at(1));
-            int shipY = std::stoi(sizePosizioneShip.at(2));
+            try {
+                int sizeShip = std::stoi(sizePosizioneShip.at(0));
+                int shipX = std::stoi(sizePosizioneShip.at(1));
+                int shipY = std::stoi(sizePosizioneShip.at(2));
+                bool horizontal = (bool) std::stoi(sizePosizioneShip.at(3));
 
-            if( !player->putShipOnBoard(sizeShip, shipX, shipY) ) {
-                std::vector<Ship*> naviAvailables = player->getAvailableShip();
-                std::cout << "Nave nn inserita" << std::endl;
-                std::cout << "Navi disponibili: ";
+                if( !player->putShipOnBoard(sizeShip, shipX, shipY, horizontal) ) {
+                    std::vector<Ship*> naviAvailables = player->getAvailableShip();
+                    std::cout << "Nave nn inserita" << std::endl;
+                    std::cout << "Navi disponibili: ";
 
-                for(Ship *ship : naviAvailables) {
-                    std::cout << ship->getSize() << ", ";
+                    for(Ship *ship : naviAvailables) {
+                        std::cout << ship->getSize() << ", ";
+                    }
+
+                    std::cout << std::endl;
+
+                    continue;
                 }
 
-                std::cout << std::endl;
-
+                std::cout << "Nave lunga: " << sizeShip << " in x: " << shipX << " - y: " << shipY << std::endl;
+                nShipPutted++;
+            } catch (std::exception &e) {
+                std::cout << "Invalid parameters" << std::endl;
                 continue;
             }
-
-            std::cout << "Nave lunga: " << sizeShip << " in x: " << shipX << " - y: " << shipY << std::endl;
-            nShipPutted++;
         }while(nShipPutted < (player->getShips().size() - 7));
 
         shipGame->addPlayer(*player);
         delete player;
     }
 
-
-    std::cout << "Ships inserted, now attack" std::endl;
+    std::cout << "Ships inserted, now attack" << std::endl;
     ATTACK_RESULT risultato = ATTACK_RESULT::EMPTY;
     std::string posizioneAttacco;
     Player *winnerPlayer = nullptr;
 
+    // game attacking loop
     do {
         for (Player &attackingPlayer: shipGame->getPlayers()) {
             std::cout << "Player: " << attackingPlayer.getName() << "attacks" << std::endl;
@@ -154,9 +161,24 @@ ShipGame *instantiateShipGame() {
             std::cin >> posizioneAttacco;
 
             std::vector<std::string> vettoreStringhe = myutility::explode(posizioneAttacco, '-');
+            bool checkParams = myutility::checkExplodesParams(vettoreStringhe, [](std::string stringa) -> bool {
+                try{
+                    int &&val = std::stoi(stringa);
+                    return true;
+                } catch (std::exception &e) {
+                    return false;
+                }
+            });
+
+            if( !checkParams ) {
+                std::cout << "Invalid parameters" << std::endl;
+                continue;
+            }
+
             int idPlayer = std::stoi(vettoreStringhe.at(0));
             int attackX = std::stoi(vettoreStringhe.at(1));
             int attackY = std::stoi(vettoreStringhe.at(2));
+
             Player player = shipGame->getPlayers().at(idPlayer);
 
             risultato = attackingPlayer.attackPlayer(&player, attackX, attackY);
@@ -169,6 +191,8 @@ ShipGame *instantiateShipGame() {
     } while(risultato != ATTACK_RESULT::WIN);
 
     std::cout << "Player: " << winnerPlayer->getName() << " win the game";
+
+    delete winnerPlayer;
 
     return shipGame;
 }

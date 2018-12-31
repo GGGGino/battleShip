@@ -65,13 +65,13 @@ Ship* Player::getAvailableShipPerLength(int shipLength) {
 }
 
 
-bool Player::putShipOnBoard(int shipLength, int x, int y) {
+bool Player::putShipOnBoard(int shipLength, int x, int y, bool horizontal) {
     Ship *ship = getAvailableShipPerLength(shipLength);
     bool shipInsertedInBoard = false;
 
     if( ship ){
         try{
-            shipInsertedInBoard = board.addShip(ship, x, y);
+            shipInsertedInBoard = board.addShip(ship, x, y, horizontal);
         }catch(CellNotEmptyException &e) {
             std::cout << "Non posso mettere la nave perchè c'è gia: " << e.getShip()->getSize() << std::endl;
         }

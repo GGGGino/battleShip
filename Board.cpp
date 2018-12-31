@@ -33,7 +33,7 @@ void Board::initializeBoard() {
  * @param y
  * @return
  */
-bool Board::addShip(Ship *ship, int x, int y) {
+bool Board::addShip(Ship *ship, int x, int y, bool horizontal) {
     if( !canAddShip(ship, x, y) ) {
         return false;
     }
@@ -41,7 +41,7 @@ bool Board::addShip(Ship *ship, int x, int y) {
     // controllo che non ci siano altre navi in quella casella
     for(int i = 0; i<ship->getXLength(); i++) {
         for(int k = 0; k<ship->getYLength(); k++) {
-            Cell *cella = grid[x+i][y+k];
+            Cell *cella = (horizontal) ? (grid[x + i][y + k]) : (grid[y + k][x + i]);
             cella->ship = ship;
         }
     }
@@ -59,7 +59,7 @@ bool Board::addShip(Ship *ship, int x, int y) {
  * @param y
  * @return
  */
-bool Board::canAddShip(Ship *ship, int x, int y) {
+bool Board::canAddShip(Ship *ship, int x, int y, bool horizontal) {
     // controllo che non vada fuori dallo schermo a dx
     if( x + ship->getXLength() > Board::SIZE ) {
         return false;
@@ -73,7 +73,12 @@ bool Board::canAddShip(Ship *ship, int x, int y) {
     // controllo che non ci siano altre navi in quella casella
     for(int i = 0; i<ship->getXLength(); i++) {
         for(int k = 0; k<ship->getYLength(); k++) {
-            Cell *cellaTemp = grid[x+i][y+k];
+            Cell *cellaTemp = nullptr;
+            if( horizontal ) {
+                cellaTemp = grid[x + i][y + k];
+            } else {
+                cellaTemp = grid[y + k][x + i];
+            }
             if( cellaTemp && cellaTemp->ship ) {
                 throw CellNotEmptyException(cellaTemp->ship);
             }
