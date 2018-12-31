@@ -138,9 +138,37 @@ ShipGame *instantiateShipGame() {
         }while(nShipPutted < (player->getShips().size() - 7));
 
         shipGame->addPlayer(*player);
+        delete player;
     }
 
-    shipGame->attackNextPlayer();
+
+    std::cout << "Ships inserted, now attack" std::endl;
+    ATTACK_RESULT risultato = ATTACK_RESULT::EMPTY;
+    std::string posizioneAttacco;
+    Player *winnerPlayer = nullptr;
+
+    do {
+        for (Player &attackingPlayer: shipGame->getPlayers()) {
+            std::cout << "Player: " << attackingPlayer.getName() << "attacks" << std::endl;
+            std::cout << "Inserisci la grandezza della barca e la posizione separate da \"-\"(idPlayer-X-Y): ";
+            std::cin >> posizioneAttacco;
+
+            std::vector<std::string> vettoreStringhe = myutility::explode(posizioneAttacco, '-');
+            int idPlayer = std::stoi(vettoreStringhe.at(0));
+            int attackX = std::stoi(vettoreStringhe.at(1));
+            int attackY = std::stoi(vettoreStringhe.at(2));
+            Player player = shipGame->getPlayers().at(idPlayer);
+
+            risultato = attackingPlayer.attackPlayer(&player, attackX, attackY);
+
+            if( risultato == ATTACK_RESULT::WIN ) {
+                winnerPlayer = &attackingPlayer;
+                break;
+            }
+        }
+    } while(risultato != ATTACK_RESULT::WIN);
+
+    std::cout << "Player: " << winnerPlayer->getName() << " win the game";
 
     return shipGame;
 }

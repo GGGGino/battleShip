@@ -24,7 +24,7 @@ public:
     Player(std::string t_name, int t_punteggio);
     ~Player(){}
     Player *setPunteggio(int t_punteggio);
-    std::string getName();
+    std::string getName() const;
     int getPunteggio();
     int getTemporimasto();
     inline std::vector<Ship> getShips() {
@@ -74,6 +74,16 @@ public:
      * @return
      */
     ATTACK_RESULT attackPlayer(Player *playerAttacked, int x, int y);
+
+    /**
+     * Method that do the attack
+     *
+     * @param idPlayerAttacked
+     * @param x
+     * @param y
+     * @return
+     */
+    ATTACK_RESULT attackPlayerById(int idPlayerAttacked, int x, int y);
 
     /**
      * Method that suffer the attack

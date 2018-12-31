@@ -18,7 +18,7 @@ Player *Player::setPunteggio(const int t_punteggio) {
     return this;
 }
 
-std::string Player::getName() {
+std::string Player::getName() const{
     return name;
 }
 
@@ -103,6 +103,10 @@ ATTACK_RESULT Player::attackPlayer(Player *playerAttacked, int x, int y) {
         result = ATTACK_RESULT::WIN;
 
     return result;
+}
+
+ATTACK_RESULT Player::attackPlayerById(int idPlayerAttacked, int x, int y) {
+    return ATTACK_RESULT::EMPTY;
 }
 
 ATTACK_RESULT Player::takeHit(Player *attackinPlayer, int x, int y) {
